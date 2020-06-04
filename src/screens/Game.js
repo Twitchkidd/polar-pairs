@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { friends } from '../data';
 import { Tile } from '../components';
 
@@ -13,15 +13,25 @@ const shuffle = array => {
 	return array;
 };
 
-export const Game = ({ playerName }) => {
+/*
+	Okay, so I need to have a record of all of them for the win-condition
+*/
+
+export const Game = ({ playerName, win }) => {
 	const [level, setLevel] = useState(1);
-	const [guesses, setGuesses] = useState([]);
+	const [guess, setGuess] = useState('');
+	const [corrects, setCorrects] = useState(0);
 	const doubledFriends = [...friends, ...friends];
 	const doubleShuffled = shuffle(doubledFriends);
 	const handleToggle = (e, name) => {
 		console.log(e.target);
 		console.log(name);
 	};
+	useEffect(() => {
+		if (corrects === friends.length) {
+			win();
+		}
+	}, [corrects])
 	return (
 		<div>
 			<h3>Welcome {playerName}!</h3>
