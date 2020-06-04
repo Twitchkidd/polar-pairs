@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { eigengrau } from '../utils';
+import { eigengrau, green } from '../utils';
 
 const StyledTile = styled.div`
 	color: ${props => props.color};
 	height: 160px;
 	width: 100px;
-	border: 2px solid ${eigengrau};
+	border: ${props => (props.status === 'active' ? '3' : '2')}px solid
+		${props => (props.status === 'correct' ? green : eigengrau)};
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
@@ -26,13 +27,14 @@ const TileGrid = styled.div`
 	padding-top: 24px;
 `;
 
-export const Tile = ({ friend, status, onToggle }) => {
+export const Tile = ({ friend, status, onGuess, id }) => {
 	return (
 		<StyledTile
+			id={id}
 			status={status}
 			color={friend.colorValue}
-			onClick={e => onToggle(e, friend.name)}>
-			{status === 'toggled'
+			onClick={e => onGuess(e)}>
+			{status !== 'inactive'
 				? `${friend.name} the ${friend.color} ${friend.animal}`
 				: null}
 		</StyledTile>
