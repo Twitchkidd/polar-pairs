@@ -14,16 +14,16 @@ const AppWrap = styled.div`
 
 const App = () => {
 	const [playerName, setPlayerName] = useState(null);
+	const [level, setLevel] = useState(1);
 	const [won, setWon] = useState(false);
 	const handleWin = () => {
-		console.log('Good job!');
 		setWon(true);
 	};
 	return (
 		<>
 			<Global />
 			<AppWrap>
-				<Game playerName='Gareth' win={handleWin} />
+				<Game playerName='Gareth' level={level} win={handleWin} won={won} />
 			</AppWrap>
 			{/* {playerName ? (
 				<Game playerName={playerName} />

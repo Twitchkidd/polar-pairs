@@ -13,12 +13,13 @@ const StyledTile = styled.div`
 	align-items: center;
 	justify-content: center;
 	padding: 4px;
+	margin: 8px;
 	${props =>
 		props.color === '#efefef' ? `text-shadow: 1px 1px 2px ${eigengrau};` : null}
 `;
 
 const TileGrid = styled.div`
-	width: 400px;
+	width: 480px;
 	margin: auto;
 	display: flex;
 	align-items: center;

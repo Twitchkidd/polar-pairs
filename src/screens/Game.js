@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { friends } from '../data';
 import { Tile } from '../components';
 
@@ -13,8 +13,7 @@ const shuffle = array => {
 	return array;
 };
 
-export const Game = ({ playerName, win }) => {
-	const [level, setLevel] = useState(1);
+export const Game = ({ playerName, level, win, won }) => {
 	const [guess, setGuess] = useState();
 	const [corrects, setCorrects] = useState(0);
 	const doubledFriends = [...friends, ...friends];
@@ -27,8 +26,15 @@ export const Game = ({ playerName, win }) => {
 		}))
 	);
 	const handleGuess = e => {
-		if (guess) {
-			if (tiles[e.target.id].name === guess.name) {
+		if (!guess) {
+			let newTiles = [...tiles];
+			newTiles[e.target.id].status = 'active';
+			setGuess(tiles[e.target.id]);
+			setTiles(newTiles);
+		} else {
+			if (e.target.id == guess.id) {
+				return;
+			} else if (tiles[e.target.id].name === guess.name) {
 				let newTiles = [...tiles];
 				newTiles[e.target.id].status = 'correct';
 				newTiles[guess.id].status = 'correct';
@@ -42,16 +48,13 @@ export const Game = ({ playerName, win }) => {
 				setGuess(null);
 				setTiles(newTiles);
 			}
-		} else {
-			let newTiles = [...tiles];
-			newTiles[e.target.id].status = 'active';
-			setGuess(tiles[e.target.id]);
-			setTiles(newTiles);
 		}
 	};
-	if (corrects === friends.length) {
-		win();
-	}
+	useEffect(() => {
+		if (corrects === friends.length) {
+			win();
+		}
+	}, [corrects]);
 	return (
 		<div>
 			<h3>Welcome {playerName}!</h3>
@@ -70,6 +73,7 @@ export const Game = ({ playerName, win }) => {
 					);
 				})}
 			</Tile.Grid>
+			{won ? <p>You Won! Congratulations!</p> : null}
 		</div>
 	);
 };
