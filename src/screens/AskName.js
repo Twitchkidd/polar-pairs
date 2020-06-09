@@ -1,4 +1,5 @@
 import React from 'react';
+import { Header } from '../components';
 
 export const AskName = ({ setPlayerName }) => {
 	const handleSetPlayerName = e => {
@@ -6,10 +7,22 @@ export const AskName = ({ setPlayerName }) => {
 		setPlayerName(e.target.playerName.value);
 	};
 	return (
-		<form onSubmit={e => handleSetPlayerName(e)}>
-			<label htmlFor='playerName'>What's your name?</label>
-			<input type='text' name='playerName' />
-			<input type='submit' value='sumbit' />
-		</form>
+		<Header>
+			<form onSubmit={e => handleSetPlayerName(e)}>
+				<label htmlFor='playerName'>What's your name?</label>
+				<div style={{ padding: '8px' }}>
+					<input
+						type='text'
+						name='playerName'
+						style={{ borderRadius: '8px' }}
+					/>
+					<input
+						type='submit'
+						value='OK'
+						style={{ marginLeft: '4px', borderRadius: '8px', padding: '4px' }}
+					/>
+				</div>
+			</form>
+		</Header>
 	);
 };
