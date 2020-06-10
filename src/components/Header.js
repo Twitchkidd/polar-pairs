@@ -1,17 +1,21 @@
-import React from 'react';
-import styled from 'styled-components';
-import { lightest } from '../utils';
+import React from "react";
+import styled from "styled-components";
+import { lightPurple } from "../utils";
 
 const StyledHeader = styled.header`
-	background-color: ${lightest};
-	max-height: 120px;
-	margin-top: 80px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  background-color: ${lightPurple};
+  border-radius: 1em;
+  max-height: 120px;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: white;
+  padding: 1em;
 `;
 
 export const Header = ({ children }) => {
-	return <StyledHeader>{children}</StyledHeader>;
+  return <StyledHeader>{children}</StyledHeader>;
 };
