@@ -1,16 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import { eigengrau, green } from '../utils';
+import { eigengrau, green, red } from '../utils';
 
 const TileText = styled.p`
 	${props =>
-		props.status === ('active' || 'correct') ? null : `visibility: hidden;`}
+		props.status === 'active' ||
+		props.status === 'correct' ||
+		props.status === 'incorrect'
+			? null
+			: `visibility: hidden;`}
 `;
 
 const StyledTile = styled.div`
 	color: ${props => props.color};
 	border: ${props => (props.status === 'active' ? '3' : '2')}px solid
-		${props => (props.status === 'correct' ? green : eigengrau)};
+		${props =>
+			props.status === 'correct'
+				? green
+				: props.status === 'incorrect'
+				? red
+				: eigengrau};
 	border-radius: 8px;
 	display: flex;
 	align-items: center;

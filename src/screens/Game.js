@@ -26,27 +26,34 @@ export const Game = ({ playerName, level, win, won }) => {
 		}))
 	);
 	const handleGuess = e => {
+		const eventId = e.target.id;
 		if (!guess) {
 			let newTiles = [...tiles];
-			newTiles[e.target.id].status = 'active';
-			setGuess(tiles[e.target.id]);
+			newTiles[eventId].status = 'active';
+			setGuess(tiles[eventId]);
 			setTiles(newTiles);
 		} else {
-			if (e.target.id == guess.id) {
+			if (eventId == guess.id) {
 				return;
-			} else if (tiles[e.target.id].name === guess.name) {
+			} else if (tiles[eventId].name === guess.name) {
 				let newTiles = [...tiles];
-				newTiles[e.target.id].status = 'correct';
+				newTiles[eventId].status = 'correct';
 				newTiles[guess.id].status = 'correct';
 				setTiles(newTiles);
 				setCorrects(corrects + 1);
 				setGuess(null);
 			} else {
 				let newTiles = [...tiles];
-				newTiles[e.target.id].status = 'inactive';
-				newTiles[guess.id].status = 'inactive';
-				setGuess(null);
+				newTiles[eventId].status = 'incorrect';
+				newTiles[guess.id].status = 'incorrect';
 				setTiles(newTiles);
+				setTimeout(() => {
+					let newTiles = [...tiles];
+					newTiles[eventId].status = 'inactive';
+					newTiles[guess.id].status = 'inactive';
+					setGuess(null);
+					setTiles(newTiles);
+				}, 400);
 			}
 		}
 	};
