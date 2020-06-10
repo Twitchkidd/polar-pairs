@@ -4,7 +4,9 @@ import { eigengrau, green } from '../utils';
 
 const TileText = styled.p`
 	${props =>
-		props.status === ('active' || 'correct') ? null : `visibility: hidden;`}
+		props.status === 'active' || props.status === 'correct'
+			? null
+			: `visibility: hidden;`}
 `;
 
 const StyledTile = styled.div`
