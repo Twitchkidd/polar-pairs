@@ -25,8 +25,8 @@ const App = () => {
 		<>
 			<Global />
 			<AppWrap>
-				<Game playerName='Gareth' level={level} win={handleWin} won={won} />
-				{/* {playerName ? (
+				{/* <Game playerName='Gareth' level={level} win={handleWin} won={won} /> */}
+				{playerName ? (
 					<Game
 						playerName={playerName}
 						level={level}
@@ -35,7 +35,7 @@ const App = () => {
 					/>
 				) : (
 					<AskName setPlayerName={setPlayerName} />
-				)} */}
+				)}
 			</AppWrap>
 		</>
 	);
