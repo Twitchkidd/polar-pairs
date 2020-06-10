@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { friends } from '../data';
-import { Tile } from '../components';
+import { Header, Tile } from '../components';
 
 // Fisher-Yates Shuffle Algorithm, an implementation
 const shuffle = array => {
@@ -56,10 +56,12 @@ export const Game = ({ playerName, level, win, won }) => {
 		}
 	}, [corrects]);
 	return (
-		<div>
-			<h3>Welcome {playerName}!</h3>
-			<p>Match the cards to win the game!</p>
-			<p>Level {level}</p>
+		<>
+			<Header>
+				<h3>Welcome {playerName}!</h3>
+				<p>Match the cards to win the game!</p>
+				<p>Level {level}</p>
+			</Header>
 			<Tile.Grid>
 				{tiles.map((friend, i) => {
 					return (
@@ -74,6 +76,6 @@ export const Game = ({ playerName, level, win, won }) => {
 				})}
 			</Tile.Grid>
 			{won ? <p>You Won! Congratulations!</p> : null}
-		</div>
+		</>
 	);
 };

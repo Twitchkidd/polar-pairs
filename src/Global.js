@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'polished';
+import { createGlobalStyle } from "styled-components";
+import { normalize } from "polished";
 
 const GlobalStyle = createGlobalStyle`
   ${normalize()};
@@ -20,6 +20,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 16px;
     position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

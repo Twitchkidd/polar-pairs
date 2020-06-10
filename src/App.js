@@ -6,10 +6,12 @@ import { AskName, Game } from './screens';
 const AppWrap = styled.div`
 	height: 100vh;
 	width: 100vw;
+	max-width: 60em;
+	margin: 0 auto;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	padding-top: 80px;
-	text-align: center;
+	align-items: center;
 `;
 
 const App = () => {
