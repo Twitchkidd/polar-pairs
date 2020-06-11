@@ -53,7 +53,7 @@ export const friends = [
 		animal: 'Orca',
 	},
 	{
-		name: 'Sunny',
+		name: 'Sonny',
 		color: 'Silver',
 		colorValue: lightest,
 		animal: 'Snowman',

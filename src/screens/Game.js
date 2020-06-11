@@ -13,9 +13,10 @@ const shuffle = array => {
 	return array;
 };
 
-export const Game = ({ playerName, level, win, won }) => {
+export const Game = ({ playerName, level, win }) => {
 	const [guess, setGuess] = useState();
 	const [corrects, setCorrects] = useState(0);
+	const [won, setWon] = useState(false);
 	const doubledFriends = [...friends, ...friends];
 	const doubleShuffled = shuffle(doubledFriends);
 	const [tiles, setTiles] = useState(
@@ -57,17 +58,33 @@ export const Game = ({ playerName, level, win, won }) => {
 			}
 		}
 	};
+	const cheat = () => {
+		setCorrects(friends.length);
+	};
 	useEffect(() => {
 		if (corrects === friends.length) {
-			win();
+			setWon(true);
 		}
 	}, [corrects]);
+	useEffect(() => {
+		if (won === true) {
+			setTimeout(() => {
+				win();
+			}, 1000);
+		}
+	}, [won]);
 	return (
 		<>
 			<Header>
 				<h3>Welcome {playerName}!</h3>
 				<p>Match the cards to win the game!</p>
-				<p>Level {level}</p>
+				<p>
+					Level {level}!
+					{level === 2 ? (
+						<span> Try to win in the fewest number of guesses!</span>
+					) : null}
+				</p>
+				<button onClick={() => setWon(true)}>Cheat button! 😃</button>
 			</Header>
 			<Tile.Grid>
 				{tiles.map((friend, i) => {
