@@ -1,13 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import { eigengrau, green } from '../utils';
+import { eigengrau, green, red } from '../utils';
+
+const TileText = styled.p`
+	${props =>
+		props.status === 'active' ||
+		props.status === 'correct' ||
+		props.status === 'incorrect'
+			? null
+			: `visibility: hidden;`}
+`;
 
 const StyledTile = styled.div`
 	color: ${props => props.color};
-	height: 160px;
-	width: 100px;
 	border: ${props => (props.status === 'active' ? '3' : '2')}px solid
-		${props => (props.status === 'correct' ? green : eigengrau)};
+		${props =>
+			props.status === 'correct'
+				? green
+				: props.status === 'incorrect'
+				? red
+				: eigengrau};
 	border-radius: 8px;
 	display: flex;
 	align-items: center;
@@ -15,13 +27,21 @@ const StyledTile = styled.div`
 	padding: 4px;
 	${props =>
 		props.color === '#efefef' ? `text-shadow: 1px 1px 2px ${eigengrau};` : null}
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	text-align: center;
 `;
 
 const TileGrid = styled.div`
+	width: 30em;
+	max-width: 100%;
+	height: 100%;
+	max-height: 800px;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(6em, 1fr));
-	grid-template-rows: minmax(8em, auto);
-	grid-gap: 1em;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: minmax(100px, 1fr);
+	grid-gap: 0.5em;
 	padding: 1em;
 `;
 
@@ -32,9 +52,10 @@ export const Tile = ({ friend, status, onGuess, id }) => {
 			status={status}
 			color={friend.colorValue}
 			onClick={e => onGuess(e)}>
-			{status !== 'inactive'
-				? `${friend.name} the ${friend.color} ${friend.animal}`
-				: null}
+			<TileText
+				status={
+					status
+				}>{`${friend.name} the ${friend.color} ${friend.animal}`}</TileText>
 		</StyledTile>
 	);
 };
